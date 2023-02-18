@@ -102,7 +102,7 @@ namespace eTickets.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("EndData")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ImageURL")
@@ -122,7 +122,7 @@ namespace eTickets.Migrations
                     b.Property<int>("ProducerId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartData")
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
