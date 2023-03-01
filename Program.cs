@@ -1,9 +1,11 @@
 using eTickets.Data;
+using eTickets.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IActorsService, ActorsService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
