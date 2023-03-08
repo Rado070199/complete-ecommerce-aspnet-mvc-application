@@ -45,6 +45,7 @@ namespace eTickets.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var actorsDetails = await _service.GetByIdAsync(id);
+
             if (actorsDetails == null) return View("NotFound");
             return View(actorsDetails);
         }
