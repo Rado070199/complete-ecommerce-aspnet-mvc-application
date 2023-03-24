@@ -14,10 +14,24 @@ namespace eTickets.Controllers
         {
             _service = service;
         }
+
+        //Filter
         public async Task<IActionResult> Index()
         {
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
             return View(allMovies);
+        }
+        public async Task<IActionResult> Filter(string searchString)
+        {
+            var allMovies = await _service.GetAllAsync(n => n.Cinema);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResult = allMovies.Where(n => n.Name.Contains(searchString) || n.Description.Contains(searchString)).ToList();
+                return View("Index", filteredResult);
+            }
+
+            return View("Index", allMovies);
         }
 
         //GET: Movies/Details/1
