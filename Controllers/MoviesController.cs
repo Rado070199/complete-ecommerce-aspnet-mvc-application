@@ -15,12 +15,13 @@ namespace eTickets.Controllers
             _service = service;
         }
 
-        //Filter
         public async Task<IActionResult> Index()
         {
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
             return View(allMovies);
         }
+
+        //Filter
         public async Task<IActionResult> Filter(string searchString)
         {
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
