@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Controllers
 {
-    public class AccountController: Controller
+    public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -55,6 +55,7 @@ namespace eTickets.Controllers
         public IActionResult Register() => View(new RegisterVM());
 
         [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> Register(RegisterVM registerVM)
         {
             if (!ModelState.IsValid) return View(registerVM);
@@ -79,6 +80,7 @@ namespace eTickets.Controllers
 
             return View("RegisterCompleted");
         }
+
         [HttpPost]
         public async Task<IActionResult> Logout()
         {

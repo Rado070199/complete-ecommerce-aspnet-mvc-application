@@ -13,7 +13,6 @@ namespace eTickets.Controllers
         private readonly IMoviesService _moviesService;
         private readonly ShoppingCart _shoppingCart;
         private readonly IOrdersService _ordersService;
-
         public OrdersController(IMoviesService moviesService, ShoppingCart shoppingCart, IOrdersService ordersService)
         {
             _moviesService = moviesService;
@@ -28,17 +27,15 @@ namespace eTickets.Controllers
             return View(orders);
         }
 
-        public IActionResult ShopingCart()
+        public IActionResult ShoppingCart()
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
-
             var response = new ShoppingCartVM()
             {
                 ShoppingCart = _shoppingCart,
                 ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
             };
-
             return View(response);
         }
         public async Task<IActionResult> AddItemToShoppingCart(int id)

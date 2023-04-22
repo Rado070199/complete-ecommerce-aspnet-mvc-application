@@ -14,7 +14,6 @@ builder.Services.AddScoped<IMoviesService, MoviesService>();
 builder.Services.AddScoped<IProducersService, ProducersService>();
 builder.Services.AddScoped<ICinemasService, CinemasService>();
 builder.Services.AddScoped<IActorsService, ActorsService>();
-builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -30,12 +29,14 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 });
-builder.Services.AddSession();
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
     SeedData(app);
+    AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
 
 void SeedData(IHost app)
 {
@@ -66,12 +67,8 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
-AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
